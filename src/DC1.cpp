@@ -452,6 +452,7 @@ void DC1::httpHa(ESP8266WebServer *server)
         snprintf_P(tmpData, sizeof(tmpData),
                    PSTR("  - platform: mqtt\r\n"
                         "    name: \"%s_%d\"\r\n"
+                        "    unique_id: \"%s_%d\"\r\n"
                         "    state_topic: \"%s\"\r\n"
                         "    command_topic: \"%s\"\r\n"
                         "    payload_on: \"on\"\r\n"
