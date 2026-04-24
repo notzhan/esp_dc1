@@ -186,6 +186,7 @@ void DC1::mqttDiscovery(bool isEnable)
             powerStatTopic[strlen(powerStatTopic) - 1] = ch + 49; // 48 + 1 + ch
             sprintf(message,
                     PSTR("{\"name\":\"%s_%d\","
+                         "\"unique_id\":\"%s_%d\","
                          "\"cmd_t\":\"%s\","
                          "\"stat_t\":\"%s\","
                          "\"pl_off\":\"off\","
@@ -193,6 +194,7 @@ void DC1::mqttDiscovery(bool isEnable)
                          "\"avty_t\":\"%s\","
                          "\"pl_avail\":\"online\","
                          "\"pl_not_avail\":\"offline\"}"),
+                    UID, (ch + 1),
                     UID, (ch + 1),
                     cmndTopic,
                     powerStatTopic,
@@ -218,18 +220,20 @@ void DC1::mqttDiscovery(bool isEnable)
             {
                 sprintf(message,
                         PSTR("{\"name\":\"%s_%s\","
+                             "\"unique_id\":\"%s_%s\","
                              "\"stat_t\":\"%s\","
                              "\"val_tpl\":\"{{value_json.%s}}\"}"),
-                        UID, tims[i].c_str(), energy.c_str(), tims[i].c_str());
+                        UID, tims[i].c_str(), UID, tims[i].c_str(), energy.c_str(), tims[i].c_str());
             }
             else
             {
                 sprintf(message,
                         PSTR("{\"name\":\"%s_%s\","
+                             "\"unique_id\":\"%s_%s\","
                              "\"stat_t\":\"%s\","
                              "\"val_tpl\":\"{{value_json.%s}}\","
                              "\"unit_of_meas\":\"%s\"}"),
-                        UID, tims[i].c_str(), energy.c_str(), tims[i].c_str(), tims2[i].c_str());
+                        UID, tims[i].c_str(), UID, tims[i].c_str(), energy.c_str(), tims[i].c_str(), tims2[i].c_str());
             }
             Mqtt::publish(topic, message, true);
             //Debug::AddInfo(PSTR("discovery: %s - %s"), topic, message);
